@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ハンドマッサージの1DAYコース｜女性限定講座">
+    <title>ハンドマッサージの1DAYコース</title>
+    <style>
+        /* styles.css の内容を埋め込み */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        header {
+            background-color: #004d80;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 1.8em;
+        }
+        main {
+            padding: 20px;
+        }
+        .course-text {
+            background-color: #fff;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        .course-text p {
+            margin: 0 0 10px;
+        }
+        .course-text .red {
+            color: #d9534f;
+            font-weight: bold;
+        }
+        .course-text .course-image {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+        .course-button {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .course-button:hover {
+            background-color: #218838;
+        }
+        .course-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+        .course-table th, .course-table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        .course-table th {
+            background-color: #004d80;
+            color: #fff;
+        }
+        .attention {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #ffeded;
+            border-left: 5px solid #d9534f;
+            border-radius: 5px;
+        }
+        .attention h2 {
+            margin-top: 0;
+            color: #d9534f;
+        }
+        .attention ul {
+            padding-left: 20px;
+        }
+        .attention ul li {
+            margin-bottom: 5px;
+        }
+        footer {
+            text-align: center;
+            padding: 10px 20px;
+            background-color: #004d80;
+            color: #fff;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+    <script>
+        // script.js の内容を埋め込み
+        function openReservationModal(year, month, day) {
+            selectedDate = `${year}-${month + 1}-${day}`;
+            reservationModal.style.display = 'block';
+
+            const reservationListDiv = document.getElementById('reservationList');
+            reservationListDiv.innerHTML = '';
+
+            if (reservations[selectedDate] && reservations[selectedDate].length > 0) {
+                reservationListDiv.innerHTML = '<h4>予約リスト</h4>';
+                reservations[selectedDate].forEach((res, index) => {
+                    const listItem = document.createElement('div');
+                    listItem.innerHTML = `
+                        <p>${res.time} - ${res.name}</p>
+                        <button onclick="editReservation(${index})">修正</button>
+                        <button onclick="deleteReservation(${index})">削除</button>
+                    `;
+                    reservationListDiv.appendChild(listItem);
+                });
+
+                reservationForm.style.display = 'none';
+            } else {
+                reservationListDiv.innerHTML = '<h4>新規予約</h4>';
+                reservationForm.style.display = 'block';
+            }
+        }
+
+        function saveReservation() {
+            const formData = new FormData(reservationForm);
+            const reservationData = Object.fromEntries(formData.entries());
+
+            if (selectedDate) {
+                reservations[selectedDate] = reservations[selectedDate] || [];
+                reservations[selectedDate].push(reservationData);
+
+                localStorage.setItem('reservations', JSON.stringify(reservations));
+                renderCalendar(currentDate);
+                reservationModal.style.display = 'none';
+            }
+        }
+
+        // 他の関数もここに追加（省略）
+    </script>
+</head>
+<body>
+    <header class="header">
+        <h1 class="post-title">ハンドマッサージの1DAYコース</h1>
+    </header>
+
+    <main class="course-page">
+        <section class="course-text">
+            <p>想像以上に疲れが溜まっている頭をもみほぐし、頭皮と毛髪もケアします。<br>
+            部分的な施術ですが全身がリラックスでき、満足度の高いヒーリング効果があります。着衣のまま施術ができるので、幅広く活用できます。</p>
+            <p class="red">【施術ベッド篇】ではスローテンポの技術で心地よさを提供します。</p>
+            <img src="https://www.mdx-edu.com/wp-content/uploads/2023/04/head1.png" alt="イメージ写真" class="course-image lazyload">
+            <button class="course-button" onclick="window.location.href='yoyakukarenda.html';">この講座の日程を見る・予約へ進む</button>
+        </section>
+
+        <section>
+            <table class="course-table">
+                <tr><th>カリキュラム抜粋</th><td>●ヘッドマッサージ作用の説明<br>●総合復習・実技テスト<br>●認定証授与式</td></tr>
+                <tr><th>費用</th><td>18,000円（税込）<br>メディックス会員価格: 17,000円（税込）</td></tr>
+                <tr><th>対象者</th><td>女性限定、初心者</td></tr>
+                <tr><th>会場</th><td>メディックスボディバランスアカデミー<br>東京都千代田区神田淡路町1-1-1 KA111ビル3F</td></tr>
+                <tr><th>申込期限</th><td>開催日の6日前まで</td></tr>
+            </table>
+        </section>
+
+        <section class="attention">
+            <h2>注意事項</h2>
+            <ul>
+                <li>妊娠中または可能性のある方は受講不可</li>
+                <li>14歳以下または70歳以上の方は受講不可</li>
+                <li>発熱や感染症の方はご遠慮ください</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 メディックスボディバランスアカデミー</p>
+    </footer>
+</body>
+</html>
