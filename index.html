@@ -449,5 +449,20 @@ var wpcf7 = {"api":{"root":"https:\/\/bosai-joshi.com\/wp-json\/","namespace":"c
   
 })(jQuery);
 </script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    document.querySelectorAll("a").forEach(function(link) {
+      const allowedLinks = ["index1.html", "index2.html", "index3.html"];
+      const href = link.getAttribute("href");
+
+      if (href && !allowedLinks.includes(href)) {
+        link.addEventListener("click", function(event) {
+          event.preventDefault(); // 他のリンクは無効化
+        });
+      }
+    });
+  });
+</script>
+
 </body>
 </html>
