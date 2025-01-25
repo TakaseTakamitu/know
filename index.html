@@ -102,7 +102,6 @@ body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: 
 		    <input id="js-header__form-input" class="l-header__form-input" type="text" value="" name="s" tabindex="-1">
         <button id="js-header__form-close" class="l-header__form-close p-close-btn" aria-hidden="true" type="button">閉じる</button>
       </form>
-      <button id="js-header__search" class="l-header__search" aria-hidden="true">&#xe915;</button>
       
    
     </div>
@@ -463,6 +462,62 @@ var wpcf7 = {"api":{"root":"https:\/\/bosai-joshi.com\/wp-json\/","namespace":"c
     });
   });
 </script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const allowedLinks = ["index1.html", "index2.html", "index3.html"];
+
+    // 全てのリンクをチェック
+    document.querySelectorAll("a").forEach(function (link) {
+      const href = link.getAttribute("href");
+
+      // 指定されたリンク以外を無効化
+      if (!allowedLinks.includes(href)) {
+        link.addEventListener("click", function (event) {
+          event.preventDefault(); // クリック無効化
+        });
+        link.style.pointerEvents = "none"; // ポインタ操作無効化
+        link.style.cursor = "default"; // カーソルをデフォルトに変更
+        link.style.color = "gray"; // 無効リンクであることを視覚的に示す（任意）
+      }
+    });
+  });
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // 無効化するメニュー項目のIDを指定
+      const disabledMenus = ["menu-item-35", "menu-item-303"]; // HOMEとセット99のmenu-item ID
+  
+      // 無効化対象のメニューを処理
+      disabledMenus.forEach(function (menuId) {
+        const menu = document.getElementById(menuId);
+  
+        if (menu) {
+          // サブメニューが開かないようにする
+          menu.addEventListener("mouseenter", function (event) {
+            event.stopPropagation();
+            menu.querySelector(".sub-menu")?.classList.add("hidden");
+          });
+  
+          // ポインタ操作を無効化
+          menu.style.pointerEvents = "none";
+          menu.style.cursor = "default";
+        }
+      });
+  
+      // 必要ならCSSでhiddenクラスを定義
+      const style = document.createElement("style");
+      style.innerHTML = `
+        .hidden {
+          display: none !important;
+        }
+      `;
+      document.head.appendChild(style);
+    });
+  </script>
+  
+  
+
 
 </body>
 </html>
