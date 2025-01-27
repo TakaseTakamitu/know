@@ -483,38 +483,50 @@ var wpcf7 = {"api":{"root":"https:\/\/bosai-joshi.com\/wp-json\/","namespace":"c
     });
   });
 </script>
+
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-      // 無効化するメニュー項目のIDを指定
-      const disabledMenus = ["menu-item-35", "menu-item-303"]; // HOMEとセット99のmenu-item ID
+      // スクール事業のメニューID
+      const allowedMenu = "menu-item-154";
   
-      // 無効化対象のメニューを処理
-      disabledMenus.forEach(function (menuId) {
-        const menu = document.getElementById(menuId);
+      // 全てのメニューをチェック
+      document.querySelectorAll(".menu-item").forEach(function (menu) {
+        const menuId = menu.getAttribute("id");
   
-        if (menu) {
-          // サブメニューが開かないようにする
-          menu.addEventListener("mouseenter", function (event) {
-            event.stopPropagation();
-            menu.querySelector(".sub-menu")?.classList.add("hidden");
+        if (menuId === allowedMenu) {
+          // スクール事業のボタンをクリックしたら再読み込みしてトップに戻る
+          menu.addEventListener("click", function (event) {
+            event.preventDefault(); // 通常のリンク動作をキャンセル
+            window.location.href = window.location.pathname + "#top"; // URLに#topを追加してリロード
+            window.location.reload(); // ページを再読み込み
           });
-  
-          // ポインタ操作を無効化
-          menu.style.pointerEvents = "none";
-          menu.style.cursor = "default";
+          menu.style.pointerEvents = "auto"; // ポインタ操作を有効化
+          menu.style.cursor = "pointer"; // カーソルをポインタに変更
+        } else {
+          // 他のリンクを無効化
+          menu.addEventListener("click", function (event) {
+            event.preventDefault(); // クリック無効化
+          });
+          menu.addEventListener("mouseenter", function (event) {
+            event.stopPropagation(); // サブメニューの展開を防ぐ
+            menu.querySelector(".sub-menu")?.classList.add("hidden"); // サブメニューを非表示
+          });
+          menu.style.pointerEvents = "none"; // ポインタ操作を無効化
+          menu.style.cursor = "default"; // カーソルを通常の矢印に
         }
       });
   
-      // 必要ならCSSでhiddenクラスを定義
-      const style = document.createElement("style");
-      style.innerHTML = `
-        .hidden {
-          display: none !important;
-        }
-      `;
-      document.head.appendChild(style);
+      // リロード後の処理：トップにスクロール
+      if (window.location.hash === "#top") {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        history.replaceState(null, null, window.location.pathname); // URLから#topを削除
+      }
     });
   </script>
+    
+  
+  
+  
   
   
 
